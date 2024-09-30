@@ -5,6 +5,7 @@
 #if DUET_RX == 1    //do not edit this line
 
 #include <Arduino.h>
+#include <EEPROM.h>
 #include <SPI.h>
 #include <Ra01S.h>
 
@@ -49,6 +50,8 @@ void setup()
 {
   delay(1000);
   Serial.begin(115200);
+  EEPROM.begin(4096);
+  Serial.printf("#PSRAM Free = %lu/%lu kBytes\r\n",ESP.getFreePsram()/1024,ESP.getPsramSize()/1024);
   SPI.begin(12,11,13,10); //sck,miso,mosi,ssl
 
   //lora.DebugPrint(true);
